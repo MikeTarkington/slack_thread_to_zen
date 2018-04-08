@@ -14,7 +14,7 @@ class SlackApi < ApplicationRecord
     request["Postman-Token"] = ENV['POSTMAN_TOKEN']
     p request
 
-    @response = http.request(request)
+    p @response = http.request(request)
   end
 
   def msg_search
