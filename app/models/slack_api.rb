@@ -5,13 +5,14 @@ class SlackApi < ApplicationRecord
 
   def initialize
     p '*' * 80
-    p url = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
+    p url = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone")
 
     http = Net::HTTP.new(url.host, url.port)
 
     request = Net::HTTP::Get.new(url)
     request["Cache-Control"] = 'no-cache'
     request["Postman-Token"] = ENV['POSTMAN_TOKEN']
+    p request
 
     @response = http.request(request)
   end
