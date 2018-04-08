@@ -2,6 +2,7 @@ class SlackApi < ApplicationRecord
 
   require 'uri'
   require 'net/http'
+  require 'json'
 
   def initialize
     url = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
@@ -13,10 +14,11 @@ class SlackApi < ApplicationRecord
     request["Postman-Token"] = ENV['POSTMAN_TOKEN']
 
     @response = http.request(request)
+    @response = JSON.parse(@response)
   end
 
   def msg_search
-    @response.read_body
+    @response
   end
 
 end
