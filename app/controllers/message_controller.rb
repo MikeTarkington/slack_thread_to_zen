@@ -21,7 +21,7 @@ class MessageController < ApplicationController
   def slash_command
     # p params
     slack = SlackApi.new
-    p slack.msg_search
+    slack.msg_search
   end
 
   def slack_thread
