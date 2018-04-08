@@ -1,11 +1,11 @@
-class SlackApi < ApplicationRecord
+require 'uri'
+require 'net/http'
 
-  require 'uri'
-  require 'net/http'
+class SlackApi < ApplicationRecord
 
   def initialize
     p '*' * 80
-    p url = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone")
+    p url = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
 
     p http = Net::HTTP.new(url.host, url.port)
 
