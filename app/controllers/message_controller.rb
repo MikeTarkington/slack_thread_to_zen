@@ -22,9 +22,9 @@ class MessageController < ApplicationController
 
   def slash_command
     p "*" * 100
-    p query = params['text']
     slack = SlackApi.new
-    slack.msg_search(query)
+    slack.msg_search(params['text'])
+    slack.channel_hist(params['channel_id'])
   end
 
   def slack_thread

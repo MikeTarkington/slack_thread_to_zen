@@ -28,9 +28,15 @@ class SlackApi < ApplicationRecord
   end
 #
   def msg_search(query_term)
-    uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{query_term}&pretty=1")
+    uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{query_term}")
     response = Net::HTTP.get(uri)
-    p response = JSON.parse(response)
+    p @search_resp = JSON.parse(response)
+  end
+
+  def channel_hist(channel_id)
+    uri = URI("https://slack.com/api/channels.history?token=#{ENV['SLACK_TOKEN']}&channel=#{channel_id}&count=1000")
+    response = Net::HTTP.get(uri)
+    p @chan_hist_resp = JSON.parse(response)
   end
 
 end
