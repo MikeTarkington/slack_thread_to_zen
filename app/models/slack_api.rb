@@ -4,8 +4,18 @@ require 'net/http'
 class SlackApi < ApplicationRecord
 
   def initialize
+
+    p params =  {
+                endpoint: 'https://slack.com/api/search.messages',
+                slack_token: ENV['SLACK_TOKEN'],
+                query: 'everyone',
+                pretty: '1'
+              }
+
     p '*' * 80
-    p url = URI.encode_www_form("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
+    # p url = URI.encode_www_form("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
+    p url = URI.encode_www_form(params)
+
 
     p http = Net::HTTP.new(url.host, url.port)
 
