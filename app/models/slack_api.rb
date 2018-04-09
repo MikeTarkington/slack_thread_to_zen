@@ -25,7 +25,7 @@ class SlackApi < ApplicationRecord
 #     p request
 #
 #     p @response = http.request(request)
-#   end
+  end
 #
   def msg_search(query_term)
     uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{query_term}&pretty=1")
