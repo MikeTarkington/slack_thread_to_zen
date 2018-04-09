@@ -24,6 +24,7 @@ class MessageController < ApplicationController
     p "*" * 100
     slack = SlackApi.new
     slack.msg_search(params['text'])
+    p "*" * 100
     slack.channel_hist(params['channel_id'])
   end
 
