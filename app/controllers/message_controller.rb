@@ -18,10 +18,13 @@ class MessageController < ApplicationController
   #post private temporary notice to user in slack if command process fails
   #post success message if successful
 
+  # might be useful gem https://github.com/slack-ruby/slack-ruby-client
+
   def slash_command
-    # p params
+    p "*" * 100
+    p query = params[text]
     slack = SlackApi.new
-    slack.msg_search
+    slack.msg_search(query)
   end
 
   def slack_thread
