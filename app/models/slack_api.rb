@@ -27,8 +27,8 @@ class SlackApi < ApplicationRecord
 #     p @response = http.request(request)
   end
 #
-  def msg_search
-    uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=everyone&pretty=1")
+  def msg_search(query_term)
+    uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{query_term}&pretty=1")
     response = Net::HTTP.get(uri)
     p response = JSON.parse(response)
   end
