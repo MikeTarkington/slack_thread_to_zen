@@ -23,9 +23,11 @@ class MessageController < ApplicationController
   def slash_command
     p "*" * 100
     slack = SlackApi.new
-    slack.msg_search(params['text'])
+    msg = slack.msg_search(params['text'])
     p "*" * 100
     slack.channel_hist(params['channel_id'])
+    p "*" * 100
+    slack.parse_timestamp(msg)
   end
 
   def slack_thread
