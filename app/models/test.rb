@@ -25,7 +25,7 @@ def thread_msgs_content(thread_messages)
     formed_msg[:user] = msg['user']
     formed_msg[:body] = msg['text']
     formed_msg[:time] = msg['ts']
-    thread_msgs_content << formed_msg
+    thread_msgs_content << formed_msg.dup
   end
   p '*' * 80
   p thread_msgs_content

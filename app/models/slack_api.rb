@@ -63,7 +63,7 @@ class SlackApi < ApplicationRecord
       formed_msg[:time] = msg['ts']
       p '-' * 80
       p formed_msg
-      p thread_msgs_content << formed_msg
+      p thread_msgs_content << formed_msg.dup
     end
     p '*' * 80
     p thread_msgs_content
