@@ -61,6 +61,8 @@ class SlackApi < ApplicationRecord
       formed_msg[:user] = msg['user']
       formed_msg[:body] = msg['text']
       formed_msg[:time] = msg['ts']
+      p '-' * 80 
+      p formed_msg
       thread_msgs_content << formed_msg
     end
     p '*' * 80
