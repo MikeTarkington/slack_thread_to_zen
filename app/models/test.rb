@@ -2,7 +2,6 @@ search_resp = {"ok"=>true, "query"=>"345", "messages"=>{"total"=>1, "pagination"
 
 def parse_timestamp(search_resp)
   #get to the permalink and pull out the ts value to be used for finding corersponding matches in the channel hist parser
-
   p timestamp = /(?<=thread_ts=)\d{10}.\d{6}/.match(search_resp['messages']['matches'][0]['permalink'])[0]
 end
 
@@ -14,7 +13,7 @@ def parse_chan_hist(chan_hist_resp, timestamp)
   #then for each match found, collect the correct pieces of info to be send to zd
   thread_messages = []
   chan_hist_resp['messages'].each do |message|
-    if message['thread_ts'].to_i == timestamp.to_i then thread_messages << message end
+    if message['thread_ts'] == timestamp then thread_messages << message end
   end
   p thread_messages
 end
