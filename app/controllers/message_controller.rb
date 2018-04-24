@@ -25,14 +25,17 @@ class MessageController < ApplicationController
     slack = SlackApi.new
     msg = slack.msg_search(params['text'])
     p "*" * 100
-    slack.channel_hist(params['channel_id'])
+    chan_hist_resp = slack.channel_hist(params['channel_id'])
     p "*" * 100
-    slack.parse_timestamp(msg)
+    timestamp = slack.parse_timestamp(msg)
+    thread_messages = slack.parse_chan_hist(chan_hist_resp, timestamp)
+    thread_msgs_content = slack.thread_msgs_content(thread_messages)
   end
 
-  def slack_thread
-  end
+  # def slack_thread
+  # end
 
   def zd_comment
   end
+
 end
