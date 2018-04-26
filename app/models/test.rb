@@ -1,3 +1,7 @@
+require 'net/http'
+require 'uri'
+require 'json'
+
 search_resp = {"ok"=>true, "query"=>"345", "messages"=>{"total"=>1, "pagination"=>{"total_count"=>1, "page"=>1, "per_page"=>20, "page_count"=>1, "first"=>1, "last"=>1}, "paging"=>{"count"=>20, "total"=>1, "page"=>1, "pages"=>1}, "matches"=>[{"next"=>{"type"=>"message", "user"=>"U8U2BS4JC", "username"=>"michael.tarkington", "ts"=>"1523167540.000017", "text"=>"zd 678", "iid"=>"7374f01e-5394-437e-810f-8e8e037ae37d", "permalink"=>"https://ddtest-workspace.slack.com/archives/C8VH6NR2A/p1523167540000017?thread_ts=1523098535.000028"}, "next_2"=>{"type"=>"message", "user"=>"U8U2BS4JC", "username"=>"michael.tarkington", "ts"=>"1523167752.000021", "text"=>"zd 890", "iid"=>"794d4f08-af5c-4d9d-8cb7-ad540ea815e9", "permalink"=>"https://ddtest-workspace.slack.com/archives/C8VH6NR2A/p1523167752000021?thread_ts=1523098535.000028"}, "type"=>"message", "user"=>"U8U2BS4JC", "username"=>"michael.tarkington", "ts"=>"1523098535.000028", "text"=>"345", "iid"=>"7d73c254-4c1b-4b37-ae6a-8415d6a7415d", "permalink"=>"https://ddtest-workspace.slack.com/archives/C8VH6NR2A/p1523098535000028?thread_ts=1523098535.000028", "team"=>"T8UQY4WJH", "channel"=>{"id"=>"C8VH6NR2A", "is_channel"=>true, "is_group"=>false, "is_im"=>false, "name"=>"general", "is_shared"=>false, "is_org_shared"=>false, "is_ext_shared"=>false, "is_private"=>false, "is_mpim"=>false, "pending_shared"=>[], "is_pending_ext_shared"=>false}}], "refinements"=>[]}}
 
 def parse_timestamp(search_resp)
@@ -31,6 +35,54 @@ def thread_msgs_content(thread_messages)
   p thread_msgs_content
 end
 
+def format_comment(raw_thread)
+    comment_str = ""
+    msg_str = ""
+    uri = []
+    response = []
+    user = {}
+    raw_thread.each do |msg|
+      p uri = URI("https://slack.com/api/users.info?token=#{ENV['SLACK_TOKEN']}&user=#{msg[:user]}")
+      p response = Net::HTTP.get(uri)
+      p user = JSON.parse(response)
+      msg_str += user['user']['name']
+      msg_str += "  -  #{Time.at(msg[:time].to_i)}\n"
+      msg_str += "-> #{msg[:body]}\n"
+      comment_str.prepend(msg_str)
+      msg_str = ""
+    end
+    p ">" * 80
+    comment_str
+end
+
 timestamp = parse_timestamp(search_resp)
 thread_messages = parse_chan_hist(chan_hist_resp, timestamp)
-thread_msgs_content(thread_messages)
+unformatted_thread = thread_msgs_content(thread_messages)
+update_str = format_comment(unformatted_thread)
+
+
+
+uri = URI.parse("https://tarktest.zendesk.com/api/v2/tickets/2.json")
+request = Net::HTTP::Put.new(uri)
+request.basic_auth("tarkmike@gmail.com", "NeegWootgarWea2")
+request.content_type = "application/json"
+request.body = JSON.dump({
+  "ticket" => {
+    "comment" => {
+      "public" => false,
+      "body" => "#{update_str}",
+      "author_id" => 494820284
+    }
+  }
+})
+
+req_options = {
+  use_ssl: uri.scheme == "https",
+}
+
+response = Net::HTTP.start(uri.hostname, uri.port, req_options) do |http|
+  http.request(request)
+end
+
+p response.code
+p response.body

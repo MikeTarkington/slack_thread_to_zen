@@ -32,12 +32,9 @@ class MessageController < ApplicationController
     p thread_messages = slack.parse_chan_hist(chan_hist_resp, timestamp)
     p "*" * 100
     p thread_msgs_content = slack.thread_msgs_content(thread_messages)
-  end
-
-  # def slack_thread
-  # end
-
-  def zd_comment
+    p "*" * 100
+    p comment_str = slack.format_comment(thread_msgs_content)
+    p ZdApi.new(comment_str)
   end
 
 end
