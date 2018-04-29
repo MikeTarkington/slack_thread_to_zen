@@ -66,7 +66,9 @@ class SlackApi < ApplicationRecord
     p raw_thread.last
     p body = raw_thread.last[:body]
     p "*" * 90
-    p srch_resp = msg_search(body)
+    uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{body}")
+    response = Net::HTTP.get(uri)
+    p srch_resp = JSON.parse(response)
     p "*" * 90
     p parent_msg_url = srch_resp['messages']['matches'][0]['permalink']
     # p parent_msg_url = msg_search(raw_thread.last[:body])['messages']['matches'][0]['permalink']
