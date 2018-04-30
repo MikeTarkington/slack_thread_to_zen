@@ -72,7 +72,7 @@ class SlackApi < ApplicationRecord
     # p "*" * 90
     # p parent_msg_url = srch_resp['messages']['matches'][0]['permalink']
     # p parent_msg_url = msg_search(raw_thread.last[:body])['messages']['matches'][0]['permalink']
-    comment_str.prepend("Slack Thead URL: #{parent_msg_url}\n")
+    comment_str#.prepend("Slack Thead URL: #{parent_msg_url}\n")
   end
 
 end
