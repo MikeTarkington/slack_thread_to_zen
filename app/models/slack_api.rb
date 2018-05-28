@@ -53,6 +53,11 @@ class SlackApi < ApplicationRecord
       uri = []
       response = []
       user = {}
+      # Lost free access to ZD account trial so I couldnt' test but it would be
+      # more performant and require less calls if the process of adding user names
+      # to the msg_str was done with a hash data structure for dictionary lookup on
+      # on any id's for which we have already found a name instead making a new
+      # call for each id. threads typically have a few people repeatedly sending msgs
       raw_thread.each do |msg|
         uri = URI("https://slack.com/api/users.info?token=#{ENV['SLACK_TOKEN']}&user=#{msg[:user]}")
         response = Net::HTTP.get(uri)
@@ -63,16 +68,9 @@ class SlackApi < ApplicationRecord
         comment_str.prepend(msg_str)
         msg_str = ""
       end
-    # p raw_thread.last
-    # p body = raw_thread.last[:body]
-    # p "*" * 90
-    # uri = URI("https://slack.com/api/search.messages?token=#{ENV['SLACK_TOKEN']}&query=#{body}")
-    # response = Net::HTTP.get(uri)
-    # p srch_resp = JSON.parse(response)
-    # p "*" * 90
-    # p parent_msg_url = srch_resp['messages']['matches'][0]['permalink']
-    # p parent_msg_url = msg_search(raw_thread.last[:body])['messages']['matches'][0]['permalink']
-    comment_str#.prepend("Slack Thead URL: #{parent_msg_url}\n")
+      # would have been nice to get the url of the parent message but slack wasn't
+      # making it easy so I just used the url for the "breacrumb" message
+    comment_str #.prepend("Slack Thead URL: #{parent_msg_url}\n")
   end
 
 end
