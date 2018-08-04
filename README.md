@@ -4,7 +4,7 @@
 
 This is a simple Rails API application that essentially acts as an intermediary between Slack and Zendesk to the smooth out the administrative task of updating a Zendesk ticket with a transcript for a specified Slack thread.
 
-![gif of functionality](https://dha4w82d62smt.cloudfront.net/items/2F3P1r1K3O3d3u0V2O08/Screen%20Recording%202018-04-29%20at%2006.12%20PM.gif?X-CloudApp-Visitor-Id=2889026&v=21ab20d0)
+![gif of functionality](https://github.com/MikeTarkington/slack_thread_to_zen/blob/master/slack_to_zd_functionality.gif)
 
 Why not copy/paste you say? Well, copying the thread text in one batch can "work" but the formatting it produces when attempting to paste into a Zendesk internal comment is very unfriendly for readability and would need major manual reformatting.  Copying and pasting each message individually would be no fun either :(
 
