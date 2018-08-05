@@ -13,15 +13,13 @@ Use the "copy link" option from a context menu of a message in the thread you sa
 
 The thread link will expire when the messages are archived so it won't work for preserving info inside the ticket, it is time consuming and annoying to both use the GUI to capture this link and then paste it into ZD, furthermore people who review the discussion have to be redirected from Zendesk back to their Slack app just to read the thread.  Also, having the thread text saved into the ticket as an internal comment makes its content searchable when looking through cases for related subject matter.
 
-** Deployment instructions **
+### Deployment instructions
 
 This is essentially middleware so it needs to be hosted with the Rails server running to listen for slash command messages from a Slack account and then send them to Zendesk.
 
 It is built with:
-
-Ruby version: 2.5.0
-
-Rails version: 5.1.6
+- Ruby version: 2.5.0
+- Rails version: 5.1.6
 
 The application is configured to handle Slack and Zendesk authentication via environment variables on the host.  Set the values of the following variables:
 
