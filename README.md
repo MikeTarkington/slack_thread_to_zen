@@ -47,15 +47,15 @@ Name the app, select the workspace where you wish to use it, please **DO NOT LIS
 
 Once the app is created in Slack, access the features and functionality section to enable slash commands:
 
-![slack app features](https://dha4w82d62smt.cloudfront.net/items/172h371u3N293u2h1F0F/Image%202018-07-08%20at%206.11.31%20PM.png?X-CloudApp-Visitor-Id=2889026&v=dc9817ec)
+![slack app features](https://github.com/MikeTarkington/slack_thread_to_zen/blob/master/Image%202018-11-08%20at%203.26.53%20PM.png?raw=true)
 
 Choose to "create a command" and enter `/zd` as the command with your applications host path as the request URL:
 
-![configure slash command](https://dha4w82d62smt.cloudfront.net/items/143I3C2r2P0c2Q3N0u0R/%5Be5152b62f4329990e6544c8f211a3ab7%5D_Image+2018-07-08+at+9.44.35+PM.png?X-CloudApp-Visitor-Id=2889026&v=d49f89e5)
+![configure slash command](https://github.com/MikeTarkington/slack_thread_to_zen/blob/master/Image%202018-11-08%20at%203.27.49%20PM.png?raw=true)
 
 Back under the "add features and functionality" section, generate your authentication token in the "Permissions" features section:
 
-![generate token](https://dha4w82d62smt.cloudfront.net/items/2z3W2N0m1g3d3u3v1s3M/%5B436e0dc01aed5280f051237bf0474f3b%5D_Image+2018-07-08+at+11.05.38+PM.png?X-CloudApp-Visitor-Id=2889026&v=e460e0b4)
+![generate token](https://github.com/MikeTarkington/slack_thread_to_zen/blob/master/Image%202018-11-08%20at%203.29.33%20PM.png?raw=true)
 
 Set the token as your hosts `SLACK_TOKEN` environment variable.
 
