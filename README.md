@@ -2,7 +2,7 @@
 
 ### Who, What, Why, How?
 
-This is a simple Rails API application that essentially acts as an intermediary between Slack and Zendesk to the smooth out the administrative task of updating a Zendesk ticket with a transcript for a specified Slack thread.
+This is a simple Rails API application that essentially acts as an intermediary between Slack and Zendesk to smooth out the administrative task of updating a Zendesk ticket with a transcript for a specified Slack thread.
 
 ![gif of functionality](https://github.com/MikeTarkington/slack_thread_to_zen/blob/master/slack_to_zd_functionality.gif)
 
